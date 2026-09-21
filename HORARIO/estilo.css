@@ -1,0 +1,177 @@
+*{
+    font-family: "Google Sans", sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    background-image: url('./fondo.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+header, footer{
+    text-align: center;
+}
+
+main{
+
+    height: 660px;
+    display: grid;
+    grid-template-areas: 
+        "horario listado";
+}
+
+footer{
+    color: #6c26aa;
+    font-weight: bolder;
+    padding-bottom: 40px;
+}
+
+/* ----------------------------------------------------------- */
+
+#titulo{
+    font-size: 5em;
+    margin: 40px;
+}
+
+#separador{
+    width: 1300px;
+    border: solid rgb(224, 186, 255) 3px;
+    margin-bottom: 60px;
+}
+
+/* ----------------------------------------------------------- */
+
+caption{
+    color: rgb(80, 14, 124);
+    font-size: 0.7em;
+    margin: 10px;
+}
+
+#tabla caption {
+  caption-side: bottom;
+  padding-top: 8px;
+}
+
+#tabla{
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    border-collapse: collapse;
+    overflow: hidden;
+    margin: auto;
+    background-color: white;
+    font-size: 1.5em;
+}
+
+#tabla th, #tabla td{
+    padding: 15px;
+}
+
+#tabla th{
+    text-align: center;
+}
+
+/* para que solo la hora esté centrada cojo el primer hijo de las filas td*/
+
+#tabla td:first-child{
+    text-align: center;
+}
+
+#tabla th{
+    background-color: #ca8dff;
+    color: white;
+}
+
+#patio{
+    background-color: #f0dfff;
+    color: #ca8dff;
+    font-weight: bolder;
+}
+
+.profesores{
+    color: #6c26aa;
+    background-color: #fcf9ff;
+    font-size: 0.7em;
+    width: 5px;
+    padding: 0;
+    /*para ver las letras en vertical y ocupen menos*/
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+    
+    font-weight: bolder;
+}
+
+.convalidada{
+    color:rgb(163, 163, 163);
+}
+
+/* ----------------------------------------------------------- */
+
+#listado{
+    display: grid;
+    width: 60%;
+    align-content: start;
+    gap: 90px;
+}
+
+#listado div{
+
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    border-collapse: collapse;
+    overflow: hidden;
+    background-color: white;
+    width: 500px;
+
+}
+
+ul{
+    list-style-type: square; 
+}
+
+.modulos{
+    font-weight: bolder;
+}
+
+#cliente::marker{
+    color: #B3D9F2;
+}
+
+#servidor::marker{
+    color: #f7e0c9;
+}
+
+#interface::marker{
+    color: #f9fadc;
+}
+
+#despliegue::marker{
+    color: #eafce8;
+}
+
+#digitalizacion::marker{
+    color: #D6C9F0;
+}
+
+#proyecto::marker{
+    color: #C2AEE8;
+}
+
+#sostenibilidad::marker{
+    color: #E2D6F5;
+}
+
+#optativa::marker{
+    color: #a8b5e8;
+}
+
+#tutoria::marker{
+    color: #B8A0E0;
+}
+
+#ipp2::marker{
+    color: #B7B7B7;
+}
