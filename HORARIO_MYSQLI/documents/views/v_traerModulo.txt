@@ -1,0 +1,7 @@
+V_TRAERMODULO.PHP
+
+Formulario con los datos del módulo para modificarlo.
+
+Recibe $datos['id'], $datos['codigo'] y $datos['nombre'].
+
+Al enviar, va a modificarModulo() con el id.

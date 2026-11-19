@@ -1,0 +1,115 @@
+ATRIBUTOS EN UNA CLASE EN PHP
+=============================
+
+class Persona {
+    public string $nombre;
+    private int $edad;
+    protected string $correo = 'sin_correo@ejemplo.com';
+}
+
+Visibilidad y acceso desde fuera de la clase:
+
+- public $nombre   -> se accede con $obj->nombre
+
+_______________________________________________________________________________
+
+INDEX.PHP - INTENTO INICIAL
+===========================
+
+<?php
+
+    $controlador = $_GET['controlador'] ?? 'C_horario';
+    $metodo = $_GET['metodo'] ?? 'listadoGrupos';
+
+    $ruta = __DIR__ .'/controladores/'.$controlador.'.php';
+
+    if (!file_exists($ruta)) {
+        http_response_code(404);
+        echo 'Controlador no encontrado';
+        exit;
+    }
+
+    require $ruta;
+
+    $objControlador = new $controlador();
+    $datos = $objControlador->$metodo();
+    require $objControlador->vista;
+
+?>
+
+_______________________________________________________________________________
+
+ALTA DE HORARIO CON PROFESOR DUPLICADO
+======================================
+
+FORMA ANTIGUA (con try/catch):
+
+try {
+    $h->empezarTransaccion();
+
+    $h->borrarPorGrupo($idGrupo);
+
+    foreach ($modulosPost as $dia => $porHora) {
+        foreach ($porHora as $idHora => $idModulo) {
+
+            if (empty($idModulo)) continue;
+
+            $idProfesor = $profPost[$dia][$idHora] ?? null;
+
+            if (empty($idProfesor)) throw new Exception("Día $dia hora $idHora: módulo sin profesor");
+
+            $h->setDia($dia);
+            $h->setIdGrupo($idGrupo);
+            $h->setIdModulo($idModulo);
+            $h->setIdProfesor($idProfesor);
+            $h->setIdHora($idHora);
+
+            $h->anadir();
+        }
+    }
+
+    $h->confirmarTransaccion();
+
+}
+catch(mysqli_sql_exception $e){
+    $h->deshacerTransaccion();
+    $ok = false;
+    $mensaje = 'Error BD: '.$e->getMessage();
+
+    /* PRUEBA TEMPORAL:
+    echo 'Código de error: '.$e->getCode().'<br>';
+    echo 'Mensaje: '.$e->getMessage().'<br>';
+    echo 'SQLSTATE: '.$e->getSqlState().'<br>';
+    exit;
+
+    Resultado de la prueba:
+    Código de error: 1062
+    Mensaje: Duplicate entry 'L-1-5' for key 'csu_horario_profesor'
+    SQLSTATE: 23000
+    */
+}
+catch(Exception $e){
+    $h->deshacerTransaccion();
+    $ok = false;
+    $mensaje = 'Error: '.$e->getMessage();
+}
+
+POR QUÉ LO HE CAMBIADO:
+
+Usaba try/catch porque los modelos hacían query() directamente y, con
+mysqli_report(...), cualquier error de SQL lanzaba una mysqli_sql_exception.
+El try/catch la cogía y yo miraba $e->getCode() para saber si era 1062.
+
+Ahora los modelos usan el metodo ejecutar($sql) de la clase Conexion, que ya
+captura la excepción y devuelve un array:
+
+    ['ok' => false, 'error' => '...', 'codigo' => 1062, 'resultado' => null]
+
+Por eso en guardarHorario() ya no uso try/catch. Compruebo $res['ok'] después
+de cada llamada (borrarPorGrupo y anadir) y leo $res['codigo'] para saber si
+el error es 1062. Si falla, hago deshacerTransaccion() a mano y salgo.
+
+La ventaja es que el controlador no necesita saber si el modelo usa mysqli o
+PDO: siempre recibe un array con 'ok', 'error' y 'codigo'. Cuando cambie a PDO,
+solo toco el metodo ejecutar($sql) de la clase Conexion; los controladores no
+cambian.

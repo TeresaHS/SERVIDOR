@@ -1,0 +1,36 @@
+MIGRACIÓN A PDO (ya hecha)
+==========================
+
+He migrado la clase Conexion a PDO. Los controladores y los modelos no han
+cambiado (salvo los 3 métodos que usaban num_rows/fetch_assoc directamente).
+
+Cambios en Conexion.php:
+
+- La conexión ahora es:
+    $dsn = "mysql:host=".SERVIDOR.";dbname=".BBDD.";charset=utf8mb4";
+    $this->conexion = new PDO($dsn, USUARIO, PASSWORD);
+    $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+- Las transacciones son beginTransaction(), commit() y rollBack() (con B mayúscula).
+
+- En ejecutar($sql), el catch es de PDOException. Para seguir teniendo el
+  código de MySQL real (1062, 1451...), devuelvo $e->errorInfo[1] en lugar
+  de $e->getCode() (que devuelve el SQLSTATE, por ejemplo '23000').
+
+- fetchTodo($sql) usa fetch(PDO::FETCH_ASSOC) dentro del while.
+
+- fetchUno($sql) ya no puede usar num_rows. Hace fetch(PDO::FETCH_ASSOC)
+  y comprueba si devuelve false.
+
+Cambios en los modelos (solo 3 métodos):
+
+- Grupo::tieneHorario(): usa fetch(PDO::FETCH_ASSOC) y comprueba false.
+- Modulo::estaEnHorario(): usa fetch(PDO::FETCH_ASSOC) y comprueba false.
+- Horario::porGrupo(): cambia fetch_assoc() por fetch(PDO::FETCH_ASSOC).
+
+NOTA IMPORTANTE SOBRE EL ERROR 1062:
+
+Con mysqli, $e->getCode() devolvía 1062.
+Con PDO, $e->getCode() devuelve '23000' (SQLSTATE).
+Por eso en ejecutar() uso $e->errorInfo[1], que sí devuelve 1062.
+Así en C_horario.php el if($res['codigo'] == 1062) sigue funcionando igual.

@@ -1,0 +1,514 @@
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --muted: #555555;
+    --line: #e4e7f0;
+    --accent: #4f5fc7;
+    --accent-soft: #eef0fb;
+    --green: #2e9e6b;
+    --green-soft: #e6f6ee;
+    --red: #d9534f;
+    --red-soft: #fdecec;
+    --amber: #b58b1f;
+    --amber-soft: #fdf6e3;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Layout ---------- */
+body > div {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- MENÚ LATERAL: niveles por anidación ---------- */
+nav {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 220px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 0 12px 0 24px;
+    border-right: 1px solid var(--line);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+nav::-webkit-scrollbar { display: none; }
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li { position: relative; }
+
+nav a {
+    display: block;
+    padding: 6px 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 0.18s ease;
+}
+nav a:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* Subniveles: cualquier ul dentro de un li */
+nav li ul a {
+    padding-left: 28px;
+    font-size: 0.82rem;
+    font-weight: 400;
+}
+nav li ul a::before {
+    content: "–";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+}
+
+/* ---------- CONTENIDO ---------- */
+main {
+    margin-left: 260px;
+    padding: 56px 40px 96px 0;
+    width: calc(100% - 260px);
+    max-width: none;
+}
+
+/* Cabecera del documento */
+main > header {
+    margin-bottom: 44px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+}
+main > header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+main > header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+/* Secciones */
+section {
+    scroll-margin-top: 32px;
+    margin-bottom: 48px;
+}
+
+/* TÍTULOS PRINCIPALES con cuadrito azul */
+h2 {
+    margin: 0 0 16px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    position: relative;
+    padding-left: 22px;
+}
+h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+}
+
+/* SUBTÍTULOS */
+h3 {
+    margin: 28px 0 10px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* TEXTOS */
+p { margin: 0 0 14px; color: var(--text); }
+
+/* LISTAS */
+ul, ol {
+    margin: 0 0 16px;
+    padding-left: 22px;
+    color: var(--text);
+}
+li { margin-bottom: 6px; }
+li::marker { color: var(--accent); }
+
+/* Lista de pasos numerados (ol dentro de section) */
+section > ol {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: step;
+}
+section > ol > li {
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: 16px;
+    counter-increment: step;
+}
+section > ol > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 26px;
+    height: 26px;
+    display: block;
+    text-align: center;
+    line-height: 24px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: var(--bg);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+section > ol ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 8px;
+}
+section > ol ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 4px;
+}
+section > ol ul li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Enlaces destacados */
+section a {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.18s ease;
+}
+section a:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+}
+
+/* Callout: caja con borde completo */
+section div {
+    padding: 14px 18px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--text);
+    margin: 20px 0;
+}
+
+/* Separador */
+hr {
+    border: none;
+    height: 1px;
+    background: var(--line);
+    margin: 44px 0;
+    width: 100%;
+}
+
+/* ---------- DIAGRAMA DE FLUJO ---------- */
+/* Contenedor: columna centrada. Hijos por posición:
+    1 BEGIN · 2 flecha · 3 operaciones · 4 flecha · 5 pregunta · 6 ramas */
+section > div:has(> div > span) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 26px 0;
+    padding: 28px 24px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    text-align: center;
+    font-size: 0.82rem;
+}
+
+/* Reset de los bloques hijos (anula el estilo genérico de callout) */
+section > div:has(> div > span) > div {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+/* 1 · BEGIN */
+section > div:has(> div > span) > div:nth-child(1) {
+    width: 100%;
+    max-width: 240px;
+    padding: 10px 22px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+section > div:has(> div > span) > div:nth-child(1) > span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--muted);
+}
+
+/* 2 y 4 · Flechas */
+section > div:has(> div > span) > div:nth-child(2),
+section > div:has(> div > span) > div:nth-child(4) {
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--muted);
+}
+
+/* 3 · Operaciones agrupadas */
+section > div:has(> div > span) > div:nth-child(3) {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px;
+    border: 1px dashed var(--line);
+    text-align: left;
+}
+section > div:has(> div > span) > div:nth-child(3) > span:nth-child(1) {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--muted);
+}
+section > div:has(> div > span) > div:nth-child(3) > span:nth-child(n+2) {
+    display: block;
+    margin-top: 6px;
+    padding: 6px 10px;
+    font-size: 0.74rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    color: var(--accent);
+}
+
+/* 5 · Pregunta */
+section > div:has(> div > span) > span {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--amber-soft);
+    color: var(--amber);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--amber);
+}
+
+/* 6 · Ramas COMMIT / ROLLBACK, lado a lado */
+section > div:has(> div > span) > div:nth-child(6) {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    margin-top: 32px;
+}
+section > div:has(> div > span) > div:nth-child(6) > div {
+    position: relative;
+    flex: 1 1 0;
+    max-width: 240px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+section > div:has(> div > span) > div:nth-child(6) > div > span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+/* Etiquetas "Sí ↓" y "No ↓" sobre cada rama */
+section > div:has(> div > span) > div:nth-child(6) > div::before {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 4px;
+    white-space: pre;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+}
+section > div:has(> div > span) > div:nth-child(6) > div:nth-child(1) {
+    background: var(--green-soft);
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+section > div:has(> div > span) > div:nth-child(6) > div:nth-child(1)::before {
+    content: "Sí\A ↓";
+    color: var(--green);
+}
+section > div:has(> div > span) > div:nth-child(6) > div:nth-child(2) {
+    background: var(--red-soft);
+    border: 1px solid var(--red);
+    color: var(--red);
+}
+section > div:has(> div > span) > div:nth-child(6) > div:nth-child(2)::before {
+    content: "No\A ↓";
+    color: var(--red);
+}
+
+/* ---------- TARJETAS ---------- */
+/* Las tarjetas son los div que contienen un h4 */
+section > div:has(h4) {
+    margin: 22px 0;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    background: none;
+}
+section > div:has(h4) > div {
+    float: left;
+    width: calc(33.333% - 11px);
+    margin-right: 16px;
+    margin-bottom: 16px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    display: block;
+    text-align: left;
+}
+section > div:has(h4) > div:nth-child(3n) { margin-right: 0; }
+section > div:has(h4)::after { content: ""; display: table; clear: both; }
+section > div:has(h4) h4 {
+    margin: 0 0 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+section > div:has(h4) p { margin: 0; font-size: 0.86rem; line-height: 1.55; }
+
+section > div:has(h4) > div:nth-child(2) {
+    border-color: var(--green);
+    background: var(--green-soft);
+}
+section > div:has(h4) > div:nth-child(2) h4 { color: var(--green); }
+section > div:has(h4) > div:nth-child(3) {
+    border-color: var(--red);
+    background: var(--red-soft);
+}
+section > div:has(h4) > div:nth-child(3) h4 { color: var(--red); }
+
+/* ---------- CÓDIGO ---------- */
+pre {
+    margin: 18px 0;
+    padding: 18px 20px;
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    color: var(--text);
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    font-family: "Inter", sans-serif;
+}
+pre .kw { color: var(--accent); font-weight: 600; }
+pre .fn { color: var(--green); }
+pre .str { color: var(--amber); }
+pre .com { color: var(--muted); font-style: italic; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+    nav {
+    position: static;
+    width: 100%;
+    max-height: none;
+    padding: 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    }
+    main {
+    margin-left: 0;
+    padding: 32px 20px 64px;
+    width: 100%;
+    }
+    section > div:has(h4) > div {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    }
+}
+
+a:focus-visible, nav a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ---------- CAJAS DE ARCHIVO ---------- */
+.archivo {
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    padding: 16px 20px;
+    margin: 18px 0;
+}
+
+.archivo h4 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.archivo p {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+}
+
+.archivo p:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- ENLACES CON ICONO A LA DERECHA ---------- */
+a.enlace-icono {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+a.enlace-icono svg {
+    flex-shrink: 0;
+    vertical-align: middle;
+    margin: 0;
+}
