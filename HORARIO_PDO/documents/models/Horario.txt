@@ -1,0 +1,11 @@
+HORARIO.PHP
+
+Uso anadir() en guardarHorario() para insertar cada celda del horario.
+Uso porGrupo($idGrupo) en altaHorarioModulos(), verHorario() y guardarHorario() para tener el horario de un grupo indexado por [idHora][dia].
+Uso borrarPorGrupo($idGrupo) en guardarHorario() para borrar el horario anterior antes de volver a insertarlo (así se actualiza).
+
+Los setters los uso en guardarHorario() para preparar cada fila antes de llamar a anadir().
+
+modificar(), eliminar(), todas() y obtener() no los uso. No tengo vista de modificar un horario por id ni de borrar una fila concreta.
+
+porGrupo() no usa fetchTodo() porque necesito reindexar el resultado como [idHora][dia]. Por eso uso ejecutar() y luego un while(fetch(PDO::FETCH_ASSOC)) manual.

@@ -1,0 +1,13 @@
+V_ALTAHORARIOPRO.PHP
+
+Muestra la tabla de horas y días, pero en cada celda con módulo muestra los profesores disponibles para elegir uno.
+
+Recibe $datos['celdas'] (módulo + profesores por día y hora), $datos['horas'], $datos['dias'] y $datos['idGrupo'].
+
+Si hay un mensaje de error (por un 1062), lo muestro arriba en rojo.
+
+Cada celda con módulo tiene un input de texto deshabilitado con el nombre del módulo, un hidden con el id del módulo, y un radio por cada profesor. El primero sale marcado por defecto (para que no se quede en blanco).
+
+Al enviar, va a guardarHorario().
+
+El botón Volver usa javascript:history.back(). Tengo pendiente preguntar a Isa si puedo usar eso o si hay otra forma en PHP.

@@ -1,0 +1,12 @@
+GRUPO.PHP
+
+Uso todas() en listarGrupos() y en borrarHorarioGrupo().
+Uso obtener($id) cuando necesito los datos de un grupo concreto (en altaHorarioModulos, altaHorarioProfesores, verHorario, confirmarBorrarHorarioGrupo).
+Uso tieneHorario($id) en la vista v_listarGrupos.php para saber si muestro el botón + o los botones de control.
+Uso borrarHorarioPorGrupo($id) en borrarHorarioGrupo() para quitar el horario de un grupo.
+
+Los métodos anadir(), modificar() y eliminar() están, pero no los uso todavía. No tengo vista de alta, modificación ni baja de grupos. Si algún día las hago, ya están listos.
+
+Los getters y setters también están, pero no los uso por ahora.
+
+tieneHorario() usa el método existe($sql) de Conexion. Si devuelve true, el grupo tiene horario; si devuelve false, no lo tiene. Sigo concatenando el id sin comillas porque sé que el id siempre es un número.
