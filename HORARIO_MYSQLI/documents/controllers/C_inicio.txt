@@ -1,7 +1,0 @@
-C_INICIO.PHP
-
-Es el controlador más simple. Solo tiene un método, inicio(), que carga la vista v_inicio.php.
-
-No tiene lógica de negocio, solo pinta la página de inicio.
-
-Lo tengo como controlador por defecto en config.php, así que si alguien entra a index.php sin parámetros, cae aquí.

@@ -1,7 +1,0 @@
-V_INICIO.PHP
-
-Es la página de inicio. Solo tiene el título, un subtítulo y el logo del centro.
-
-No recibe datos del controlador, así que no usa $datos.
-
-El body tiene id="cuerpoInicio" para poner el fondo azul, y el main tiene id="cajaInicio" con dos cajas: una a la izquierda con el título y otra a la derecha con el logo.

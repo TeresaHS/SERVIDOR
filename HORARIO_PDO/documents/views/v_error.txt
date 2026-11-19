@@ -1,9 +1,0 @@
-V_ERROR.PHP
-
-Vista genérica de error.
-
-Recibe $datos['mensaje'] y $datos['volver'].
-
-Si no llega volver, el botón Volver va a inicio por defecto.
-
-La uso en todos los controladores cuando algo falla (validación, error de BD, id inexistente, etc.).

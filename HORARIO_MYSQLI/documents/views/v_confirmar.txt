@@ -1,9 +1,0 @@
-V_CONFIRMAR.PHP
-
-Vista genérica de confirmación.
-
-Recibe $datos['mensaje'], $datos['urlSi'] y $datos['urlNo'].
-
-Sirve para cualquier confirmación (baja de módulo, borrar horario de grupo, etc.). No está atada a ningún controlador concreto.
-
-El botón SÍ va a urlSi, el NO y el Volver van a urlNo.

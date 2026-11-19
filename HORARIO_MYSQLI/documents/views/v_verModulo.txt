@@ -1,7 +1,0 @@
-V_VERMODULO.PHP
-
-Muestra los datos de un módulo en modo solo lectura.
-
-Recibe $datos['codigo'] y $datos['nombre'].
-
-Los inputs están deshabilitados, así que no se pueden modificar.

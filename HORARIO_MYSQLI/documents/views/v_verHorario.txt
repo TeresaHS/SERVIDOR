@@ -1,7 +1,0 @@
-V_VERHORARIO.PHP
-
-Muestra el horario de un grupo en modo solo lectura.
-
-Recibe $datos['grupo'], $datos['horas'], $datos['horario'] (indexado por [idHora][dia]) y $datos['dias'].
-
-Para cada celda, si hay horario, pinto el nombre del módulo en negrita y el nombre del profesor debajo.

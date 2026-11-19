@@ -1,9 +1,0 @@
-V_ALTAMODULO.PHP
-
-Muestra el resultado del alta de un módulo.
-
-Recibe $datos['ok'] (true si fue bien) y usa $objControlador->mensaje para el texto.
-
-Si ok es true, el mensaje sale en verde; si no, en rojo.
-
-No tiene formulario, solo el mensaje. El botón Volver lleva a pedirDatosModulo().
