@@ -1,0 +1,8 @@
+PROFESOR.PHP
+
+Uso porModuloGrupo($idModulo, $idGrupo) en altaHorarioProfesores() y guardarHorario() para saber qué profesores imparten un módulo en un grupo.
+Uso obtener($id) en mensajeDuplicado() para saber el nombre del profesor que ha chocado.
+
+anadir(), modificar(), eliminar() y todas() no los uso. No tengo vista de alta, modificación ni baja de profesores.
+
+Los getters y setters están, pero no los uso.

@@ -1,0 +1,7 @@
+V_MODIFICARMODULO.PHP
+
+Muestra el resultado de la modificación de un módulo.
+
+Recibe $datos['ok'] y usa $objControlador->mensaje para el texto.
+
+Igual que v_altaModulo: solo mensaje, sin formulario. El botón Volver lleva a listarModulos().

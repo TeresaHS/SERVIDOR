@@ -1,0 +1,20 @@
+CONEXION.PHP
+
+Aquí guardo la conexión a la base de datos.
+
+He puesto mysqli_report(...) para que, si hay un error de SQL, me lance una excepción en vez de un warning. Así sé cuándo algo falla.
+
+Los tres métodos de transacción (empezar, confirmar, deshacer) los uso en guardarHorario() para que, si algo falla, no se quede el horario a medias.
+
+ejecutar($sql) es la base de todo: intenta ejecutar la consulta y me devuelve un array con:
+- ok: true o false
+- error: el mensaje de error si falla
+- codigo: el código de error de MySQL (1062, 1451, etc.)
+- resultado: el objeto que devuelve query()
+
+Así, en los controladores, puedo hacer if(!$res['ok']) y saber qué ha pasado sin usar try/catch en cada sitio.
+
+fetchTodo($sql) me devuelve un array de filas (para SELECT de muchos).
+fetchUno($sql) me devuelve una sola fila (para SELECT de uno).
+
+Así no repito el while(fetch_assoc) en todos los modelos.

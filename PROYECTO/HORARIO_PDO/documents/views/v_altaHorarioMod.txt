@@ -1,0 +1,11 @@
+V_ALTAHORARIOMOD.PHP
+
+Muestra la tabla de horas y días para elegir los módulos de cada franja.
+
+Recibe $datos['grupo'] (para el título), $datos['horas'], $datos['modulos'] y $datos['dias'].
+
+Cada celda tiene un <select> con los módulos del grupo. La opción por defecto es "No asignado" (value="").
+
+Al enviar el formulario, va a altaHorarioProfesores() con los módulos elegidos.
+
+No preselecciono ningún módulo porque en el alta el grupo no tiene horario todavía.

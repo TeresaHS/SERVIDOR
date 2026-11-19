@@ -1,0 +1,13 @@
+MODULO.PHP
+
+Uso todas() en listarModulos().
+Uso obtener($id) en traerModulo(), verModulo(), confirmarBajaModulo(), y en C_horario (altaHorarioProfesores, guardarHorario).
+Uso modulosGrupo($id) en altaHorarioModulos() para saber qué módulos se imparten en un grupo.
+Uso estaEnHorario($id) en bajaModulo() para no borrar un módulo que está en uso.
+Uso anadir() en altaModulo().
+Uso modificar() en modificarModulo().
+Uso eliminar() en bajaModulo().
+
+Los getters y setters están, pero casi no los uso: solo setId() en bajaModulo().
+
+estaEnHorario() usa ejecutar($sql) y luego fetch(PDO::FETCH_ASSOC). Si devuelve false, el módulo no está en horario; si devuelve una fila, sí lo está.

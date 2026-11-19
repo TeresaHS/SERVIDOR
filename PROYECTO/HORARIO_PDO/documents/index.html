@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentación · Aplicación Crear Horario</title>
+
+    <!-- Google Fonts: Inter (única fuente) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="./style.css" rel="stylesheet"/>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='2' width='22' height='28' fill='%234f5fc7'/%3E%3Crect x='5' y='2' width='6' height='28' fill='%233a47a3'/%3E%3Crect x='11' y='26' width='16' height='4' fill='%23dfe3fb'/%3E%3Crect x='14' y='8' width='10' height='2.5' fill='white'/%3E%3Crect x='14' y='13' width='7' height='2.5' fill='white'/%3E%3C/svg%3E" />
+    </head>
+    <body>
+        <div>
+        <!-- ============ MENÚ LATERAL ============ -->
+        <nav aria-label="Índice de la documentación">
+            <ul>
+            <li><a href="#principal">Enunciado principal</a></li>
+            <li><a href="#procedimiento">Procedimiento</a></li>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li>
+                <ul>
+                <li><a href="#enfoque">Enfoque de proyecto</a></li>
+                </ul>
+            </li>
+            <li><a href="#analisis">Análisis</a></li>
+            <li>
+                <ul>
+                <li><a href="#actores">Actores</a></li>
+                <li><a href="#requerimientos">Requerimientos</a></li>
+                <li><a href="#modelo-datos">Modelo de datos</a></li>
+                <li><a href="#paso-bbdd">Paso a BBDD</a></li>
+                <li><a href="#diccionario">Diccionario de datos</a></li>
+                </ul>
+            </li>
+            <li><a href="#desarrollo">Desarrollo</a></li>
+            <li>
+                <ul>
+                <li><a href="#mapa">Mapa navegación</a></li>
+                <li><a href="#mockups">Mockups y bocetos</a></li>
+                <li><a href="#pruebas">Plan de pruebas</a></li>
+                </ul>
+            </li>
+            <li><a href="#archivos">Explicación de archivos</a></li>
+            <li>
+                <ul>
+                <li><a href="#archivos-modelos">Modelos y conexión</a></li>
+                <li><a href="#archivos-controladores">Controladores</a></li>
+                <li><a href="#archivos-vistas">Vistas</a></li>
+                <li><a href="#archivos-pdo">Migración a PDO</a></li>
+                </ul>
+            </li>
+            <li><a href="#anotaciones">Anotaciones</a></li>
+            <li>
+                <ul>
+                <li><a href="#transacciones">Transacciones</a></li>
+                </ul>
+            </li>
+            </ul>
+        </nav>
+
+        <!-- ============ CONTENIDO ============ -->
+        <main>
+
+            <header>
+            <h1>Aplicación Crear Horario de una Clase</h1>
+            <p>Documentación del proyecto · Ciclos formativos · Análisis, diseño y desarrollo</p>
+            </header>
+
+            <!-- ---------- PRINCIPAL ---------- -->
+            <section id="principal">
+            <h2>Enunciado principal</h2>
+            <p>
+                Queremos hacer una <strong>aplicación web</strong> que permita dar de alta el horario de un grupo
+                indicando la asignatura y el profesor/es que la imparten a cada hora y día de la semana.
+                El proyecto se centra solo en <strong>ciclos formativos</strong>. Para esto se necesita saber
+                los grupos, sus módulos y quién/es la imparten.
+            </p>
+            </section>
+
+            <!-- ---------- PROCEDIMIENTO ---------- -->
+            <section id="procedimiento">
+            <h2>Procedimiento planteado</h2>
+            <p>
+                A la hora de que un directivo/a dé de alta el horario de un grupo, se pasa por varios procesos:
+            </p>
+            <ol>
+                <li>
+                A partir de un listado de grupos, seleccionar el grupo a dar de alta:
+                <ul>
+                    <li>Si no tiene horario → Clic <strong>[+]</strong></li>
+                    <li>Si ya tiene horario → Clic <strong>[EDITAR]</strong> o <strong>[VER]</strong></li>
+                </ul>
+                </li>
+                <li>
+                Elegir el módulo de cada franja horaria todos los días.
+                <ul>
+                    <li>Clic <strong>[MODIFICAR PROFESORES]</strong></li>
+                </ul>
+                </li>
+                <li>
+                Elegir el profesor que imparte ese módulo en esa franja horaria todos los días.
+                <ul>
+                    <li>Clic <strong>[DAR DE ALTA HORARIO]</strong></li>
+                </ul>
+                </li>
+                <li>Se almacena el horario del grupo en la BBDD.</li>
+            </ol>
+            </section>
+
+            <hr />
+
+            <!-- ---------- INTRODUCCIÓN ---------- -->
+            <section id="introduccion">
+            <h2>Introducción</h2>
+
+            <h3 id="enfoque">Enfoque de proyecto</h3>
+            <ul>
+                <li>
+                <strong>ANÁLISIS</strong>
+                <ul>
+                    <li>Actores</li>
+                    <li>Requerimientos (procesos)</li>
+                    <li>
+                    Modelo de datos
+                    <ul>
+                        <li>Entidad Relación</li>
+                        <li>Paso a Base de Datos</li>
+                        <li>Diccionario de Datos</li>
+                    </ul>
+                    </li>
+                </ul>
+                </li>
+                <li>
+                <strong>DISEÑO</strong>
+                <ul>
+                    <li>Mapa navegación</li>
+                </ul>
+                </li>
+                <li>
+                <strong>DESARROLLO</strong>
+                <ul>
+                    <li>Mockups y bocetos</li>
+                    <li>
+                    Datos
+                    <ul>
+                        <li>Revisión Modelo de Datos</li>
+                        <li>SQL</li>
+                    </ul>
+                    </li>
+                    <li>Plan de pruebas</li>
+                    <li>Programar</li>
+                </ul>
+                </li>
+            </ul>
+            </section>
+
+            <hr />
+
+            <!-- ---------- ANÁLISIS ---------- -->
+            <section id="analisis">
+            <h2>Análisis</h2>
+
+            <h3 id="actores">Actores</h3>
+            <p>
+                Para el objetivo principal solo tendremos como actor a una <strong>directiva académica</strong>
+                que dará de alta el horario de la clase que elija.
+            </p>
+
+            <h3 id="requerimientos">Requerimientos</h3>
+            <p>
+                Enlace a hoja de cálculo con los requerimientos:
+                <a class="enlace-icono" href="#" target="_blank" rel="noopener">HORARIO · Listado de Requerimientos Funcionales <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+
+            <h3 id="modelo-datos">Modelo de datos · Entidad Relación</h3>
+            <p>
+                Diagrama E-R: <a class="enlace-icono" href="#" target="_blank" rel="noopener">E-R HORARIO.drawio <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+            <div>
+                En cuanto a cómo se van a trabajar los datos, el admin deberá exportar los datos de los
+                profesores desde <strong>Rayuela</strong> para guardarlos en la base de datos.
+            </div>
+
+            <h3 id="paso-bbdd">Paso a Base de Datos</h3>
+            <p>
+                <a class="enlace-icono" href="#" target="_blank" rel="noopener">PASO A BBDD PROYECTO HORARIO.drawio <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+
+            <h3 id="diccionario">Diccionario de Datos</h3>
+            <p>
+                <a class="enlace-icono" href="#" target="_blank" rel="noopener">HORARIO · Diccionario de Datos <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+            </section>
+
+            <hr />
+
+            <!-- ---------- DESARROLLO ---------- -->
+            <section id="desarrollo">
+            <h2>Desarrollo</h2>
+
+            <h3 id="mapa">Mapa de navegación</h3>
+            <p>
+                Mapa:
+                <a class="enlace-icono" href="https://canva.link/co7f5u1f08tlhe8" target="_blank" rel="noopener">Ver mapa en Canva <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+
+            <h3 id="mockups">Mockups y bocetos</h3>
+            <p>
+                Boceto:
+                <a class="enlace-icono" href="https://canva.link/qsecop633bk2de5" target="_blank" rel="noopener">Ver boceto en Canva <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+            <p>
+                Mockup:
+                <a class="enlace-icono" href="https://github.com/TeresaHS/PROYECTO_HORARIO" target="_blank" rel="noopener">Repositorio en GitHub <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+
+            <h3 id="pruebas">Plan de pruebas</h3>
+            <p>
+                Plan:
+                <a class="enlace-icono" href="#" target="_blank" rel="noopener">HORARIO · Plan de Pruebas <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+            </section>
+
+            <hr />
+
+            <!-- ---------- EXPLICACIÓN DE ARCHIVOS ---------- -->
+            <section id="archivos">
+                <h2>Explicación de archivos</h2>
+                <p>
+                    En este apartado explico, archivo por archivo, qué hace cada uno y por qué lo he hecho así.
+                    Está redactado en primera persona y de forma simple, tal como lo tengo en mis apuntes.
+                </p>
+
+                <h3 id="archivos-modelos">Modelos y conexión</h3>
+
+                <div class="archivo">
+                    <h4>Conexion.php</h4>
+                    <p>
+                        Aquí guardo la conexión a la base de datos. Ahora uso PDO.
+                        En el constructor pongo <code>PDO::ATTR_ERRMODE</code> a <code>ERRMODE_EXCEPTION</code>
+                        para que, si hay un error de SQL, me lance una excepción en vez de un warning.
+                        Los tres métodos de transacción (<code>empezar</code>, <code>confirmar</code>,
+                        <code>deshacer</code>) los uso en <code>guardarHorario()</code> para que, si algo falla,
+                        no se quede el horario a medias. Con PDO son <code>beginTransaction()</code>,
+                        <code>commit()</code> y <code>rollBack()</code>.
+                    </p>
+                    <p>
+                        <code>ejecutar($sql)</code> es la base de todo: intenta ejecutar la consulta y me devuelve
+                        un array con <code>ok</code>, <code>error</code>, <code>codigo</code> (el código de error
+                        de MySQL, que saco de <code>$e-&gt;errorInfo[1]</code>) y <code>resultado</code>.
+                        Así, en los controladores, puedo hacer <code>if(!$res['ok'])</code> sin usar try/catch en cada sitio.
+                    </p>
+                    <p>
+                        <code>fetchTodo($sql)</code> me devuelve un array de filas (para SELECT de muchos) usando
+                        <code>fetch(PDO::FETCH_ASSOC)</code>. <code>fetchUno($sql)</code> me devuelve una sola fila;
+                        como PDO no tiene <code>num_rows</code>, hago <code>fetch</code> y compruebo si devuelve <code>false</code>.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>Grupo.php</h4>
+                    <p>
+                        Uso <code>todas()</code> en <code>listarGrupos()</code> y en <code>borrarHorarioGrupo()</code>.
+                        Uso <code>obtener($id)</code> cuando necesito los datos de un grupo concreto.
+                        Uso <code>tieneHorario($id)</code> en la vista <code>v_listarGrupos.php</code> para saber
+                        si muestro el botón + o los botones de control. Uso <code>borrarHorarioPorGrupo($id)</code>
+                        en <code>borrarHorarioGrupo()</code>.
+                    </p>
+                    <p>
+                        Los métodos <code>anadir()</code>, <code>modificar()</code> y <code>eliminar()</code> están,
+                        pero no los uso todavía. Los getters y setters también están, pero no los uso por ahora.
+                        <code>tieneHorario()</code> usa <code>ejecutar($sql)</code> y luego
+                        <code>fetch(PDO::FETCH_ASSOC)</code>: si devuelve <code>false</code>, no hay horario;
+                        si devuelve una fila, sí lo hay.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>Hora.php</h4>
+                    <p>
+                        Uso <code>todas()</code> en casi todos los métodos de <code>C_horario</code>
+                        (<code>altaHorarioModulos</code>, <code>altaHorarioProfesores</code>, <code>verHorario</code>,
+                        <code>guardarHorario</code>) para pintar las filas de la tabla de horario.
+                        Uso <code>obtener($id)</code> en <code>mensajeDuplicado()</code> para saber la franja horaria
+                        a la que se refiere el error 1062. <code>anadir()</code>, <code>modificar()</code> y
+                        <code>eliminar()</code> no los uso.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>Horario.php</h4>
+                    <p>
+                        Uso <code>anadir()</code> en <code>guardarHorario()</code> para insertar cada celda del horario.
+                        Uso <code>porGrupo($idGrupo)</code> en <code>altaHorarioModulos()</code>, <code>verHorario()</code>
+                        y <code>guardarHorario()</code> para tener el horario de un grupo indexado por
+                        <code>[idHora][dia]</code>. Uso <code>borrarPorGrupo($idGrupo)</code> en
+                        <code>guardarHorario()</code> para borrar el horario anterior antes de volver a insertarlo.
+                    </p>
+                    <p>
+                        Los setters los uso en <code>guardarHorario()</code> para preparar cada fila antes de llamar
+                        a <code>anadir()</code>. <code>porGrupo()</code> no usa <code>fetchTodo()</code> porque
+                        necesito reindexar el resultado como <code>[idHora][dia]</code>; por eso uso
+                        <code>ejecutar()</code> y luego un <code>while(fetch(PDO::FETCH_ASSOC))</code> manual.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>Modulo.php</h4>
+                    <p>
+                        Uso <code>todas()</code> en <code>listarModulos()</code>. Uso <code>obtener($id)</code> en
+                        <code>traerModulo()</code>, <code>verModulo()</code>, <code>confirmarBajaModulo()</code> y en
+                        <code>C_horario</code>. Uso <code>modulosGrupo($id)</code> en <code>altaHorarioModulos()</code>.
+                        Uso <code>estaEnHorario($id)</code> en <code>bajaModulo()</code> para no borrar un módulo en uso.
+                        Uso <code>anadir()</code>, <code>modificar()</code> y <code>eliminar()</code> en el alta,
+                        modificación y baja de módulos.
+                    </p>
+                    <p>
+                        <code>estaEnHorario()</code> usa <code>ejecutar($sql)</code> y luego
+                        <code>fetch(PDO::FETCH_ASSOC)</code>: si devuelve <code>false</code>, el módulo no está en
+                        horario; si devuelve una fila, sí lo está.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>Profesor.php</h4>
+                    <p>
+                        Uso <code>porModuloGrupo($idModulo, $idGrupo)</code> en <code>altaHorarioProfesores()</code>
+                        y <code>guardarHorario()</code> para saber qué profesores imparten un módulo en un grupo.
+                        Uso <code>obtener($id)</code> en <code>mensajeDuplicado()</code> para saber el nombre del
+                        profesor que ha chocado. <code>anadir()</code>, <code>modificar()</code>,
+                        <code>eliminar()</code> y <code>todas()</code> no los uso.
+                    </p>
+                </div>
+
+                <h3 id="archivos-controladores">Controladores</h3>
+
+                <div class="archivo">
+                    <h4>C_horario.php</h4>
+                    <p>
+                        Aquí gestiono todo lo relacionado con el horario: listar grupos, dar de alta un horario
+                        (primero módulos, luego profesores), verlo y borrarlo.
+                        <code>altaHorarioProfesores()</code> recibe los módulos del POST. Si no hay ninguno, va a
+                        <code>v_error.php</code>. Si hay, construye un array <code>$celdas</code> con el módulo y los
+                        profesores de cada celda, y carga <code>v_altaHorarioPro.php</code>.
+                    </p>
+                    <p>
+                        <code>mensajeDuplicado($mensajeError)</code> es privado. Recibe el mensaje de error de MySQL
+                        y, si es un 1062 de la restricción <code>csu_horario_profesor</code>, extrae el día, la hora
+                        y el profesor, y devuelve un mensaje tipo "Isabel ya tiene clase el Lunes de 08:15-09:10".
+                    </p>
+                    <p>
+                        <code>guardarHorario()</code> es el más complejo: comprueba el <code>idGrupo</code>, empieza
+                        la transacción, borra el horario anterior, recorre los módulos comprobando que tengan profesor,
+                        inserta cada fila con <code>anadir()</code>, confirma la transacción si todo va bien, y si algo
+                        falla la deshace. Si el error es 1062, vuelve a <code>v_altaHorarioPro.php</code> con el mensaje
+                        de <code>mensajeDuplicado()</code> y los módulos ya seleccionados.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>C_modulo.php</h4>
+                    <p>
+                        Aquí gestiono todo lo relacionado con los módulos: listar, dar de alta, ver, modificar y dar
+                        de baja. <code>validarModulo($codigo, $nombre)</code> es privado y lo uso en
+                        <code>altaModulo()</code> y <code>modificarModulo()</code>. Comprueba que el código sea
+                        numérico de 4 dígitos y que el nombre no esté vacío.
+                    </p>
+                    <p>
+                        <code>altaModulo()</code> valida los datos. Si hay errores, va a <code>v_error.php</code> con
+                        volver a <code>pedirDatosModulo</code>. Si la BD devuelve 1062, muestro "Ya existe un módulo
+                        con ese código". <code>bajaModulo()</code> primero comprueba si el módulo está en horario con
+                        <code>estaEnHorario()</code>; si lo está, va a error. Si la BD devuelve 1451 (FK), muestro un
+                        mensaje específico.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>C_inicio.php</h4>
+                    <p>
+                        Es el controlador más simple. Solo tiene un método, <code>inicio()</code>, que carga la vista
+                        <code>v_inicio.php</code>. No tiene lógica de negocio, solo pinta la página de inicio.
+                        Lo tengo como controlador por defecto en <code>config.php</code>.
+                    </p>
+                </div>
+
+                <h3 id="archivos-vistas">Vistas</h3>
+
+                <div class="archivo">
+                    <h4>v_altaHorarioMod.php</h4>
+                    <p>
+                        Muestra la tabla de horas y días para elegir los módulos de cada franja. Recibe
+                        <code>$datos['grupo']</code>, <code>$datos['horas']</code>, <code>$datos['modulos']</code> y
+                        <code>$datos['dias']</code>. Cada celda tiene un <code>&lt;select&gt;</code> con los módulos
+                        del grupo. La opción por defecto es "No asignado" (<code>value=""</code>). Al enviar el
+                        formulario, va a <code>altaHorarioProfesores()</code>.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>v_altaHorarioPro.php</h4>
+                    <p>
+                        Muestra la tabla de horas y días, pero en cada celda con módulo muestra los profesores
+                        disponibles para elegir uno. Recibe <code>$datos['celdas']</code>, <code>$datos['horas']</code>,
+                        <code>$datos['dias']</code> y <code>$datos['idGrupo']</code>. Si hay un mensaje de error (por
+                        un 1062), lo muestro arriba en rojo. Cada celda con módulo tiene un input de texto
+                        deshabilitado con el nombre del módulo, un hidden con el id del módulo, y un radio por cada
+                        profesor.
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>v_error.php</h4>
+                    <p>
+                        Vista genérica de error. Recibe <code>$datos['mensaje']</code> y <code>$datos['volver']</code>.
+                        Si no llega <code>volver</code>, el botón Volver va a inicio por defecto. La uso en todos los
+                        controladores cuando algo falla (validación, error de BD, id inexistente, etc.).
+                    </p>
+                </div>
+
+                <div class="archivo">
+                    <h4>v_confirmar.php</h4>
+                    <p>
+                        Vista genérica de confirmación. Recibe <code>$datos['mensaje']</code>,
+                        <code>$datos['urlSi']</code> y <code>$datos['urlNo']</code>. Sirve para cualquier confirmación
+                        (baja de módulo, borrar horario de grupo, etc.). El botón SÍ va a <code>urlSi</code>, el NO y
+                        el Volver van a <code>urlNo</code>.
+                    </p>
+                </div>
+
+                <h3 id="archivos-pdo">Migración a PDO</h3>
+
+                <div class="archivo">
+                    <h4>Cambios generales</h4>
+                    <p>
+                        He migrado la clase <code>Conexion</code> a PDO. Los controladores y los modelos no han
+                        cambiado (salvo los 3 métodos que usaban <code>num_rows</code>/<code>fetch_assoc</code>
+                        directamente).
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Conexión:</strong> ahora es
+                            <code>new PDO($dsn, USUARIO, PASSWORD)</code> con
+                            <code>PDO::ATTR_ERRMODE = ERRMODE_EXCEPTION</code>.
+                        </li>
+                        <li>
+                            <strong>Transacciones:</strong> <code>beginTransaction()</code>, <code>commit()</code> y
+                            <code>rollBack()</code> (con B mayúscula).
+                        </li>
+                        <li>
+                            <strong>ejecutar($sql):</strong> el <code>catch</code> es de <code>PDOException</code>.
+                            Para seguir teniendo el código de MySQL real (1062, 1451...), devuelvo
+                            <code>$e-&gt;errorInfo[1]</code> en lugar de <code>$e-&gt;getCode()</code> (que devuelve
+                            el SQLSTATE, por ejemplo <code>'23000'</code>).
+                        </li>
+                        <li>
+                            <strong>fetchTodo($sql):</strong> usa <code>fetch(PDO::FETCH_ASSOC)</code> dentro del
+                            <code>while</code>.
+                        </li>
+                        <li>
+                            <strong>fetchUno($sql):</strong> ya no puede usar <code>num_rows</code>. Hace
+                            <code>fetch(PDO::FETCH_ASSOC)</code> y comprueba si devuelve <code>false</code>.
+                        </li>
+                    </ul>
+                    <p>
+                        En los modelos solo han cambiado 3 métodos:
+                    </p>
+                    <ul>
+                        <li><code>Grupo::tieneHorario()</code>: usa <code>fetch(PDO::FETCH_ASSOC)</code> y comprueba <code>false</code>.</li>
+                        <li><code>Modulo::estaEnHorario()</code>: usa <code>fetch(PDO::FETCH_ASSOC)</code> y comprueba <code>false</code>.</li>
+                        <li><code>Horario::porGrupo()</code>: cambia <code>fetch_assoc()</code> por <code>fetch(PDO::FETCH_ASSOC)</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="archivo">
+                    <h4>Nota importante sobre el error 1062</h4>
+                    <p>
+                        Con mysqli, <code>$e-&gt;getCode()</code> devolvía 1062. Con PDO,
+                        <code>$e-&gt;getCode()</code> devuelve <code>'23000'</code> (SQLSTATE). Por eso en
+                        <code>ejecutar()</code> uso <code>$e-&gt;errorInfo[1]</code>, que sí devuelve 1062. Así en
+                        <code>C_horario.php</code> el <code>if($res['codigo'] == 1062)</code> sigue funcionando igual.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ---------- ANOTACIONES ---------- -->
+            <section id="anotaciones">
+            <h2>Anotaciones</h2>
+
+            <h3 id="transacciones">Transacciones</h3>
+            <p>
+                Referencia: <a class="enlace-icono" href="https://www.php.net/manual/en/mysqli.begin-transaction.php" target="_blank" rel="noopener">mysqli::begin_transaction <svg width="12" height="12"><use href="#icon-link"/></svg></a>
+            </p>
+
+            <!-- Diagrama de flujo -->
+            <div role="img" aria-label="Diagrama de flujo de una transacción: BEGIN, operaciones agrupadas, ¿todo correcto?, COMMIT o ROLLBACK">
+                <div>
+                BEGIN<span>Se abre la transacción</span>
+                </div>
+                <div>↓</div>
+                <div>
+                <span>Operaciones agrupadas</span>
+                <span>INSERT INTO cuentas …</span>
+                <span>UPDATE cuentas SET …</span>
+                <span>DELETE FROM logs …</span>
+                </div>
+                <div>↓</div>
+                <span>¿Todo correcto?</span>
+                <div>
+                <div>
+                    COMMIT
+                    <span>Cambios guardados permanentemente</span>
+                </div>
+                <div>
+                    ROLLBACK
+                    <span>Todo vuelve al estado original</span>
+                </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas explicativas -->
+            <div>
+                <div>
+                <h4>begin_transaction()</h4>
+                <p>
+                    Marca el inicio de la transacción. A partir de aquí, todo lo que se haga
+                    (INSERT/UPDATE/DELETE) queda pendiente, no visible para otras conexiones
+                    (según nivel de aislamiento) y reversible. Internamente ejecuta
+                    <code>START TRANSACTION</code> en el servidor.
+                </p>
+                </div>
+                <div>
+                <h4>commit()</h4>
+                <p>
+                    Confirma todos los cambios pendientes desde el <code>begin_transaction()</code>.
+                    A partir de aquí son definitivos y visibles para todos.
+                </p>
+                </div>
+                <div>
+                <h4>rollback()</h4>
+                <p>
+                    Descarta todos los cambios pendientes desde el <code>begin_transaction()</code>.
+                    La BD vuelve al estado que tenía antes.
+                </p>
+                </div>
+            </div>
+
+            <!-- Código PHP -->
+            <pre><code><span class="kw">try</span> {
+            $conexion-&gt;<span class="fn">begin_transaction</span>();
+
+            $conexion-&gt;<span class="fn">query</span>(<span class="str">"INSERT ..."</span>); <span class="com">// si falla, lanza excepción</span>
+            $conexion-&gt;<span class="fn">query</span>(<span class="str">"UPDATE ..."</span>); <span class="com">// si falla, lanza excepción</span>
+
+            $conexion-&gt;<span class="fn">commit</span>();
+        } <span class="kw">catch</span> (<span class="fn">mysqli_sql_exception</span> $e) {
+            $conexion-&gt;<span class="fn">rollback</span>();
+            <span class="com">// log, mostrar error, etc.</span>
+            <span class="kw">echo</span> $e-&gt;<span class="fn">getMessage</span>();
+        }</code></pre>
+
+            </section>
+
+        </main>
+        </div>
+    </body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <symbol id="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </symbol>
+    </svg>
+</html>

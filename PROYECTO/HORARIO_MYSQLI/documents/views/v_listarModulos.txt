@@ -1,0 +1,9 @@
+V_LISTARMODULOS.PHP
+
+Muestra la lista de módulos en una tabla.
+
+Recibe $datos['modulos'].
+
+Para cada módulo, pinto el código, el nombre y tres botones: 🗑 (confirmarBajaModulo), ✎ (traerModulo) y Ver (verModulo).
+
+Arriba hay un botón + para dar de alta un módulo nuevo (pedirDatosModulo).

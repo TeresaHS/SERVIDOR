@@ -1,0 +1,9 @@
+HORA.PHP
+
+Uso todas() en casi todos los métodos de C_horario (altaHorarioModulos, altaHorarioProfesores, verHorario, guardarHorario). Es para pintar las filas de la tabla de horario.
+
+Uso obtener($id) en mensajeDuplicado() para saber la franja horaria a la que se refiere el error 1062.
+
+anadir(), modificar() y eliminar() no los uso. No tengo vista de alta, modificación ni baja de horas. Además, anadir() estaba mal (pasaba dos valores para una columna); lo he corregido a VALUES ('$this->hora') por si lo uso en el futuro.
+
+Los getters y setters están, pero no los uso.

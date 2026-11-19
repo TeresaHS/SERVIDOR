@@ -1,0 +1,5 @@
+V_PEDIRDATOSMODULO.PHP
+
+Formulario vacío para dar de alta un módulo.
+
+Tiene dos campos: código y nombre. Al enviar, va a altaModulo().

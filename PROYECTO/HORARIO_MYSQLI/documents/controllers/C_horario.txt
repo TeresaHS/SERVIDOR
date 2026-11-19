@@ -1,0 +1,31 @@
+C_HORARIO.PHP
+
+Aquí gestiono todo lo relacionado con el horario: listar grupos, dar de alta un horario (primero módulos, luego profesores), verlo y borrarlo.
+
+listarGrupos() carga v_listarGrupos.php con todos los grupos. Le paso también el objeto $g para poder llamar a tieneHorario() desde la vista.
+
+altaHorarioModulos() carga v_altaHorarioMod.php con las horas, los módulos del grupo y los días. No le paso el horario guardado porque en el alta el grupo no tiene horario todavía.
+
+hayAlgunModulo($modulosPost) es privado. Recorre los módulos enviados y devuelve true si hay al menos uno. Lo uso en altaHorarioProfesores() para que no se pueda pasar a la pantalla de profesores sin haber elegido ningún módulo.
+
+altaHorarioProfesores() recibe los módulos del POST. Si no hay ninguno, va a v_error.php. Si hay, construye un array $celdas con el módulo y los profesores de cada celda, y carga v_altaHorarioPro.php.
+
+verHorario() carga v_verHorario.php con el horario del grupo indexado por [idHora][dia].
+
+mensajeDuplicado($mensajeError) es privado. Recibe el mensaje de error de MySQL y, si es un 1062 de la restricción csu_horario_profesor, extrae el día, la hora y el profesor, y devuelve un mensaje tipo "Isabel ya tiene clase el Lunes de 08:15-09:10". Si no puede extraerlo, devuelve un mensaje genérico.
+
+guardarHorario() es el más complejo. Hace lo siguiente:
+1. Comprueba que llegue el idGrupo.
+2. Empieza la transacción.
+3. Borra el horario anterior del grupo con borrarPorGrupo().
+4. Recorre los módulos y, para cada uno, comprueba que tenga profesor. Si no, deshace la transacción y sale.
+5. Inserta cada fila con anadir().
+6. Si todo va bien, confirma la transacción.
+7. Si algo falla, deshace la transacción. Si el error es 1062, vuelve a v_altaHorarioPro.php con el mensaje de mensajeDuplicado() y los módulos ya seleccionados, para que el usuario solo cambie el profesor conflictivo.
+8. Si todo va bien, carga v_verHorario.php con el mensaje "Horario guardado correctamente".
+
+Uso $codigoError para guardar el código de error de la BD y saber si fue 1062, porque si el error es "módulo sin profesor", $res no existe (no se llegó a llamar a anadir()).
+
+confirmarBorrarHorarioGrupo() muestra v_confirmar.php con el mensaje de confirmación. Si el usuario pulsa SÍ, va a borrarHorarioGrupo(); si pulsa NO, vuelve al listado.
+
+borrarHorarioGrupo() llama a borrarHorarioPorGrupo(). Si falla, va a v_error.php. Si va bien, vuelve a v_listarGrupos.php.
