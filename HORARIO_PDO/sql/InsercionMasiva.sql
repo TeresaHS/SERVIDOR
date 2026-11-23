@@ -122,3 +122,8 @@ INSERT INTO horario (dia, idGrupo, idModulo, idProfesor, idHora) VALUES
 ('V', (SELECT id FROM grupos WHERE codigo = '1SMR'), (SELECT id FROM modulos WHERE codigo = '0222'), 6, (SELECT id FROM horas WHERE hora = '11:30-12:25')),
 ('V', (SELECT id FROM grupos WHERE codigo = '1SMR'), (SELECT id FROM modulos WHERE codigo = '0226'), 7, (SELECT id FROM horas WHERE hora = '12:25-13:20')),
 ('V', (SELECT id FROM grupos WHERE codigo = '1SMR'), (SELECT id FROM modulos WHERE codigo = '0221'), 6, (SELECT id FROM horas WHERE hora = '13:20-14:15'));
+
+
+-- Usuario de prueba
+INSERT INTO usuarios (correo, password, rol) VALUES ('admin', '123', 'a');
+INSERT INTO usuarios (correo, password, rol) VALUES ('public', '123', 'p');

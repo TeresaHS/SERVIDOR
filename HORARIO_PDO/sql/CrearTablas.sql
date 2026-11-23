@@ -82,3 +82,11 @@ UNSIGNED en los IDs:
 - MySQL exige que FK y PK tengan el mismo tipo exacto, incluido UNSIGNED
 - No es obligatorio, pero es una convención habitual y coherente para identificadores
 */
+
+CREATE TABLE usuarios (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol CHAR(1) NOT NULL DEFAULT 'p',
+    CONSTRAINT chk_rol CHECK (rol IN ('a', 'p'))
+);

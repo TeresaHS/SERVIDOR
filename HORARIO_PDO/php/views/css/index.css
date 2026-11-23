@@ -1,13 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 
+:root{
+    --color-azul-principal: #074595;
+    --color-azul-secundario: #226FD6;
+    --color-azul-claro: #85b0ff;
+    --color-azul-borde: rgb(49, 49, 174);
+    --color-azul-borde-tabla: #99acff;
+    --color-azul-fondo-suave: #CDD6FF;
+    --color-blanco: #ffffff;
+    --color-negro: #000000;
+    --color-gris-oscuro: #333333;
+    --color-gris-medio: #555555;
+    --color-gris-borde: rgb(78, 79, 78);
+    --color-gris-fondo: #E0E0E0;
+    --color-rojo: #b82c2c;
+    --color-rojo-confirmar: #C0392B;
+    --color-rojo-error: #d63321;
+    --color-verde-ok: green;
+    --color-texto-input: rgb(0, 6, 84);
+}
+
 *{
     font-family: "Google Sans",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
+header{
+    border-bottom: 1px solid var(--color-azul-borde);
+}
+
 body{
     margin: 0;
+}
+
+
+footer{
+    text-align: center;
+    padding: 20px 0px;
 }
 
 main{
@@ -20,7 +50,7 @@ a{
 
 header{
     font-size: 5px;
-    background-color: white;
+    background-color: var(--color-blanco);
 }
 
 nav{
@@ -41,8 +71,8 @@ nav li {
     height: 40px;
     text-align: center;
     align-content: center;
-    background-color: #074595;
-    color: white;
+    background-color: var(--color-azul-principal);
+    color: var(--color-blanco);
     font-size: 16px;
 }
 
@@ -55,28 +85,23 @@ nav li a {
     text-decoration: none;
     font-family: "Google Sans",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-/*
-para cuando tenga el inicio de sesion, que el boton de sesion se vaya a la derecha
 
 nav li:last-child {
     float: right;
     margin: 0px;
 }
-*/
+
 nav a {
     text-decoration: none;
-    color: #333;
+    color: var(--color-gris-oscuro);
     font-family: sans-serif;
 }
 
-header{
-    border-bottom: 1px solid rgb(49, 49, 174);
-}
 
 #indiceActivo{
-    color: #074595;
-    background-color: white;
-    border: 1px solid rgb(49, 49, 174);
+    color: var(--color-azul-principal);
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-azul-borde);
 }
 
 #volver{
@@ -85,7 +110,7 @@ header{
     margin-top: 0px;
     margin-left: 20px;
     display: inline-block;
-    color: #074595;
+    color: var(--color-azul-principal);
     font-weight: bolder;
 }
 
@@ -102,13 +127,10 @@ h2{
 }
 
 #tablalistar{
-    border: 1px solid rgb(78, 79, 78);
+    border: 1px solid var(--color-gris-borde);
     border-collapse: collapse;
-    /*margin: 0 auto;*/
     margin: 20px auto;
     width: 90%;
-    /*position: relative;
-    top: 50px;*/
     text-align: left;
 }
 
@@ -118,12 +140,12 @@ h2{
 
 #tablalistar th, #tablalistar td{
     padding: 0px 10px;
-    border: 1px solid rgb(78, 79, 78);
+    border: 1px solid var(--color-gris-borde);
 }
 
 #tablalistar th{
     width: 100px;
-    color: #074595;
+    color: var(--color-azul-principal);
 }
 
 #tablalistar td:nth-child(3) {
@@ -141,25 +163,25 @@ h2{
 }
 
 #tablalistar td a:nth-child(1) {
-    color: white;
+    color: var(--color-blanco);
     margin-right: 10px;
-    background-color: #b82c2c;
+    background-color: var(--color-rojo);
 }
 
 #tablalistar td a:nth-child(2) {
-    color: white;
+    color: var(--color-blanco);
     margin-right: 10px;
-    background-color: #226FD6;
+    background-color: var(--color-azul-secundario);
 }
 
 #tablalistar td a:nth-child(3) {
-    color: #226FD6;
-    background-color: #CDD6FF;
+    color: var(--color-azul-secundario);
+    background-color: var(--color-azul-fondo-suave);
 }
 
 #tablalistar td a:only-child {
-    color: #555;
-    background-color: #E0E0E0;
+    color: var(--color-gris-medio);
+    background-color: var(--color-gris-fondo);
     width: 130px;
     margin-right: 0;
 }
@@ -168,10 +190,10 @@ h2{
 /* ----------------------------------------------------------------------------------------- */
 
 #tablaHorario{
-    border: 1px solid rgb(78, 79, 78);
+    border: 1px solid var(--color-gris-borde);
     border-collapse: collapse;
     margin: 0 auto;
-    table-layout: fixed;   /* reparte el ancho a partes iguales, ignorando el contenido */
+    table-layout: fixed; /* reparte el ancho para que ocupe igual */
     width: 90%;
     text-align: left;
 }
@@ -189,15 +211,15 @@ h2{
 }
 
 #tablaHorario thead, #tablaHorario tr td:first-child{
-    background-color: #CDD6FF;
+    background-color: var(--color-azul-fondo-suave);
     font-weight: 700;
-    color: #074595;
+    color: var(--color-azul-principal);
 }
 
 
 #tablaHorario th, #tablaHorario td{
     padding: 0px 10px;
-    border: 1px solid #99acff;
+    border: 1px solid var(--color-azul-borde-tabla);
 }
 
 
@@ -218,7 +240,6 @@ h2{
     width: 100%;
     box-sizing: border-box;
     margin: 0px 0px 10px 0px;
-    /*box-sizing: border-box, el width: 100% sigue siendo el 100% del content box del td, no del ancho total de la celda*/
 }
 
 #tablaHorario input[type="radio"]{
@@ -240,6 +261,8 @@ h2{
     text-align: center;
 }
 
+/*------------------------------------------------*/
+
 #botonesEdicion{
     text-align: right;
     position: fixed;
@@ -249,15 +272,15 @@ h2{
 
 #restablecer{
     display: inline-block;
-    background-color: black;
-    color: white;
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
     padding: 10px;
 }
 
 #modificar{
     display: inline-block;
-    background-color: #226FD6;
-    color: white;
+    background-color: var(--color-azul-secundario);
+    color: var(--color-blanco);
     padding: 10px;
 }
 
@@ -267,10 +290,6 @@ h2{
     cursor: pointer;
 }
 
-footer{
-    text-align: center;
-    padding: 20px 0px;
-}
 
 /*---------------------------*/
 
@@ -278,9 +297,9 @@ footer{
     display: block;
     width: 100px;
     height: 40px;
-    margin: 0 auto 0 auto;   /* centrado horizontal + margen abajo */
-    background-color: #226FD6;
-    color: white;
+    margin: 0 auto;
+    background-color: var(--color-azul-secundario);
+    color: var(--color-blanco);
     text-align: center;
     align-content: center;
     font-weight: bolder;
@@ -291,7 +310,7 @@ footer{
 
 #formAlta{
     width: 80%;
-    border: 1px solid #226FD6;
+    border: 1px solid var(--color-azul-secundario);
     margin: auto;
     padding: 10px;
     display: flow-root;
@@ -309,8 +328,8 @@ footer{
 
 
 #formAlta input[type="submit"]{
-    color: white;
-    background-color: #074595;
+    color: var(--color-blanco);
+    background-color: var(--color-azul-principal);
     border: none;
     padding: 5px;
     width: auto;
@@ -318,20 +337,20 @@ footer{
     margin: 10px 0 0 0;
 }
 
-
 /*------------------------------------------------*/
 
 .mensaje-ok{
-    color: green;
+    color: var(--color-verde-ok);
     text-align: center;
     font-weight: bold;
 }
 .mensaje-error{
-    color: #d63321;
+    color: var(--color-rojo-error);
     text-align: center;
     font-weight: bold;
 }
 
+/*------------------------------------------------*/
 
 #botonesConfirmar{
     text-align: center;
@@ -342,26 +361,23 @@ footer{
     display: inline-block;
     padding: 10px 20px;
     margin-right: 15px;
-    background-color: #074595;
-    color: white;
+    background-color: var(--color-azul-principal);
+    color: var(--color-blanco);
 }
 
 #confirmar{
     display: inline-block;
     padding: 10px 20px;
-    background-color: #C0392B;
-    color: white;
+    background-color: var(--color-rojo-confirmar);
+    color: var(--color-blanco);
 }
 
 #mensaje{
     text-align: center;
 }
 
-
-/* cambios para el inicio */
-
 #cuerpoInicio{
-    background-color: #074595;
+    background-color: var(--color-azul-principal);
 }
 
 #cajaInicio {
@@ -381,7 +397,7 @@ footer{
 
 #cajaInicioIzq *{
     text-align: left;
-    color: white;
+    color: var(--color-blanco);
 }
 
 #cajaInicioIzq h1 {
@@ -408,4 +424,93 @@ footer{
     width: 300px;
     max-width: 480px;
     height: auto;
+}
+
+.cuerpoLogin {
+    background-color: var(--color-azul-principal);
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cuerpoLogin main {
+    padding: 40px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+#formSesion{
+    width: 100%;
+    box-sizing: border-box;
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+    display: flow-root;
+    background-color: var(--color-azul-principal);
+}
+
+#formSesion *{
+    display: block;
+    color: var(--color-blanco);
+}
+
+#formSesion input{
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--color-texto-input);
+    height: 35px;
+    padding: 0 0 0 10px;
+}
+
+
+#formSesion input[type="submit"]{
+    color: var(--color-blanco);
+    background-color: var(--color-azul-claro);
+    border: none;
+    padding: 5px;
+    display: inline;
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+#formSesion input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+.cuerpoLogin header > div {
+    padding: 20px 40px;
+    color: var(--color-azul-principal);
+}
+
+.cuerpoLogin header h1 {
+    text-align: left;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.cuerpoLogin header span {
+    font-size: 0.9rem;
+    color: var(--color-gris-medio);
+}
+
+.cuerpoLogin main > h1 {
+    color: var(--color-blanco);
+    margin-top: 40px;
+}
+
+.cuerpoLogin .mensaje-error {
+    text-align: center;
+}
+
+.cuerpoLogin footer {
+    color: var(--color-blanco);
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.cuerpoLogin footer p {
+    margin: 0;
 }
